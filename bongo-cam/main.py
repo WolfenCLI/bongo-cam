@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 import tkinter as tk
 from main_window import Application
@@ -19,6 +21,7 @@ def close_window(app_root: tk.Tk):
 def mainloop(app_root: tk.Tk, main_window: Application):
     while running:
         app_root.after(0, main_window.update_mouse_position)
+        app_root.after(0, main_window.update_pressed_keys)
         main_window.update_idletasks()
         main_window.update()
 
@@ -35,7 +38,9 @@ if __name__ == "__main__":
     root = tk.Tk()
     if not is_admin():
         ask_root: tk.Label = tk.Label(root, text="Please, run this program as root")
-        exit(-1)
+        ask_root.pack()
+        root.mainloop()
+        exit(42)
     root.protocol("WM_DELETE_WINDOW", lambda: close_window(root))
     root.title(title)
     bongo_cam = Application(root)
