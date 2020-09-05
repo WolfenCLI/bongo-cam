@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import tkinter as tk
+
 from main_window import Application
-import os
 
 title: str = "Bongo-cam"
 
@@ -36,6 +37,8 @@ def is_admin() -> bool:
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.geometry("500x500")
+    root.resizable(0, 0)
     if not is_admin():
         ask_root: tk.Label = tk.Label(root, text="Please, run this program as root")
         ask_root.pack()
