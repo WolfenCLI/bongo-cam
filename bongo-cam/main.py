@@ -4,6 +4,8 @@ import os
 import sys
 import tkinter as tk
 
+import keyboard
+
 from main_window import Application
 
 title: str = "Bongo-cam"
