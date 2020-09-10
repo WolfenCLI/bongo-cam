@@ -21,17 +21,20 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        label: tk.Label = tk.Label(self.root, textvariable=self.cur_x)
-        label2: tk.Label = tk.Label(self.root, textvariable=self.cur_y)
-        label3: tk.Label = tk.Label(self.root, textvariable=self.temp)
-        label.pack()
-        label2.pack()
-        label3.pack()
+        self.label: tk.Label = tk.Label(self.root, textvariable=self.cur_x)
+        self.label2: tk.Label = tk.Label(self.root, textvariable=self.cur_y)
+        self.label3: tk.Label = tk.Label(self.root, textvariable=self.temp)
+        self.label.pack()
+        self.label2.pack()
+        self.label3.pack()
+        self.label.after(0, self.update_mouse_position)
+        self.label3.after(0, self.update_pressed_keys)
 
     def update_mouse_position(self):
         pointer_x, pointer_y = self.root.winfo_pointerxy()
         self.cur_x.set(pointer_x)
         self.cur_y.set(pointer_y)
+        self.label.after(32, self.update_mouse_position)
 
     def update_pressed_keys(self):
         self.keys_pressed.clear()
@@ -39,3 +42,4 @@ class Application(tk.Frame):
             if is_pressed(key):
                 self.keys_pressed.append(key)
         self.temp.set("{}".format(self.keys_pressed))
+        self.label3.after(32, self.update_pressed_keys)

@@ -2,6 +2,7 @@
 
 import os
 import sys
+import time
 import tkinter as tk
 
 import keyboard
@@ -19,14 +20,6 @@ def close_window(app_root: tk.Tk):
         window.destroy()
     app_root.destroy()
     exit(0)
-
-
-def mainloop(app_root: tk.Tk, main_window: Application):
-    while running:
-        app_root.after(0, main_window.update_mouse_position)
-        app_root.after(0, main_window.update_pressed_keys)
-        main_window.update_idletasks()
-        main_window.update()
 
 
 def is_admin() -> bool:
@@ -49,4 +42,4 @@ if __name__ == "__main__":
     root.protocol("WM_DELETE_WINDOW", lambda: close_window(root))
     root.title(title)
     bongo_cam = Application(root)
-    mainloop(root, bongo_cam)
+    bongo_cam.mainloop()
