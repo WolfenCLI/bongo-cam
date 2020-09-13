@@ -2,10 +2,7 @@
 
 import os
 import sys
-import time
 import tkinter as tk
-
-import keyboard
 
 from main_window import Application
 
@@ -32,14 +29,18 @@ def is_admin() -> bool:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.geometry("500x500")
+    root.geometry("640x640")
     root.resizable(0, 0)
+
     if not is_admin():
         ask_root: tk.Label = tk.Label(root, text="Please, run this program as root")
         ask_root.pack()
         root.mainloop()
         exit(42)
+
     root.protocol("WM_DELETE_WINDOW", lambda: close_window(root))
     root.title(title)
+
     bongo_cam = Application(root)
+    bongo_cam.pack()
     bongo_cam.mainloop()

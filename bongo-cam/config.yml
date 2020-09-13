@@ -1,4 +1,4 @@
-track_all_keys: true
+track_all_keys: false
 tracked_keys:
   - Q
   - W
